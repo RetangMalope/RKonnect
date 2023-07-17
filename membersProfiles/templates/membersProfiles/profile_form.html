@@ -1,0 +1,105 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+    .formPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.content-box {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.formWrapper {
+    margin-top: 20px;
+}
+
+.form__field {
+    margin-bottom: 15px;
+}
+
+.form__field label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form__field input,
+.form__field select,
+.form__field textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn--sub {
+    background-color: #ff00dd;
+    color: #fff;
+    border: none;
+}
+
+.btn--sub:hover {
+    background-color: #b30092;
+}
+
+</style>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<main class="formPage my-xl">
+    <div class="content-box">
+        <div class="formWrapper">
+            <a href="{% url 'account' %}">
+                <input class="btn btn--sub btn--lg my-md" type="submit" value="Go Back" style="color: darkpink;" />
+              </a>
+              
+            <h3>Update Your Account</h3>
+            <br>
+            <form class="form" method="POST" action="{% url 'edit-account' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form__field">
+                    <label for="formInput#text">{{ field.label }}</label>
+                    {{ field }}
+                </div>
+                {% endfor %}
+                <input class="btn btn--sub btn--lg my-md" type="submit" value="Submit" style="color: darkpink;" />
+
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock content %}

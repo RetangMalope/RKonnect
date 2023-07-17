@@ -1,0 +1,137 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+    .register-form {
+      width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f8f8f8;
+      text-align: center;
+    }
+
+    .register-form h4 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .register-form input[type="text"],
+    .register-form input[type="password"],
+    .register-form input[type="email"] {
+      width: 100%;
+      padding: 12px 20px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    .register-form button {
+      width: 100%;
+      padding: 12px 20px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 4px;
+      background-color: #ac4caf;
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .register-form button:hover {
+      background-color: #71a045;
+    }
+    
+    .login-form {
+      width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f8f8f8;
+      text-align: center;
+    }
+  
+    .login-form h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+  
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+      width: 100%;
+      padding: 12px 20px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+  
+    .login-form button {
+      width: 100%;
+      padding: 12px 20px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 4px;
+      background-color: #ac4caf;
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  
+    .login-form button:hover {
+      background-color: #71a045;
+    }
+
+  </style>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<body>
+    <div>
+        {% if page == 'register' %}
+            <div class="register-form">
+                <img src="/static/images/Logo.png" alt="Login to RKonnect" style="width: 200px; height: auto;">
+                <p>Unleash your potential, login with peers, and soar together.</p>
+                <form method="POST" action="{% url 'register' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Register</button>
+                    {% if messages %}
+                        {% for message in messages %}
+                             <p style="color: red;">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </form>
+                <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+            </div>
+        {% else %}
+            <div class="login-form">
+               
+                <img src="/static/images/Logo.png" alt="Login to RKonnect" style="width: 200px; height: auto;">
+
+                <p>Unleash your potential, login with peers, and soar together.</p>
+                <form action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="username" placeholder="Enter your username" />
+                    <input type="password" name="password" placeholder="Enter your password" />
+                    <button type="submit">Login to RKonnect</button>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p style="color: red;">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                    <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+</body>
+{% endblock content %}
